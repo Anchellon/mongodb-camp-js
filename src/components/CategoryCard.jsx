@@ -10,7 +10,7 @@ CategoryCard.propTypes = {
 function CategoryCard({ name, services }) {
   // console.log(services);
   return (
-    <Card style={{ width: "16rem", height: "11rem" }}>
+    <Card>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
 
