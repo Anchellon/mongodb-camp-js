@@ -8,7 +8,7 @@ const services = [
   {
     id: "recEHmzvupvT8ZONH",
     name: "albany sectional",
-    category: "AI",
+    category: "AI Prog",
     url: "https://dl.airtable.com/.attachmentThumbnails/0be1af59cf889899b5c9abb1e4db38a4/d631ac52",
   },
   {

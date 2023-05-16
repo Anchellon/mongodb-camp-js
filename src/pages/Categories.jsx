@@ -1,5 +1,6 @@
 import CategoryCard from "../components/CategoryCard";
 import svcs from "../assets/data";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 function Categories() {
   const categories = [...new Set(svcs.map((o) => o.category))];
   const services = [];
@@ -11,18 +12,18 @@ function Categories() {
   return (
     <>
       <p>Explore Categories</p>
-      <div className="row">
-        <div className="col-3 mb-3">
-          {categories.map(function (category, i) {
-            return (
-              <CategoryCard
-                name={categories[i]}
-                services={services[i]}
-                key={i}
-              />
-            );
-          })}
-        </div>
+      <div>
+        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+          <Masonry>
+            {categories.map(function (category, i) {
+              return (
+                <div style={{ padding: "20px" }} key={i}>
+                  <CategoryCard name={categories[i]} services={services[i]} />
+                </div>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
       </div>
     </>
   );
