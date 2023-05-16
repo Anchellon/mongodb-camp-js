@@ -1,33 +1,28 @@
 import CategoryCard from "../components/CategoryCard";
 import svcs from "../assets/data";
 function Categories() {
-  let categories = ["AI", "cat2"];
-  const services = svcs.filter((service) => service.category === categories[0]);
+  const categories = [...new Set(svcs.map((o) => o.category))];
+  const services = [];
+
+  categories.map((category) => {
+    services.push(svcs.filter((service) => service.category === category));
+  });
+
   return (
     <>
       <p>Explore Categories</p>
       <div className="row">
         <div className="col-3 mb-3">
-          <CategoryCard name={"hi"} services={services} />
+          {categories.map(function (category, i) {
+            return (
+              <CategoryCard
+                name={categories[i]}
+                services={services[i]}
+                key={i}
+              />
+            );
+          })}
         </div>
-        {/* <div className="col-3 mb-3">
-          <CategoryCard />
-        </div>
-        <div className="col-3 mb-3">
-          <CategoryCard />
-        </div>
-        <div className="col-3 mb-3">
-          <CategoryCard />
-        </div>
-        <div className="col-3 mb-3">
-          <CategoryCard />
-        </div>
-        <div className="col-3 mb-3">
-          <CategoryCard />
-        </div>
-        <div className="col-3 mb-3">
-          <CategoryCard />
-        </div> */}
       </div>
     </>
   );
