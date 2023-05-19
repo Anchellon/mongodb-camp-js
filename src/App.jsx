@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Contribute from "./pages/Contribute";
 
 import "./App.css";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Home />} />
 
           <Route path="contribute" element={<Contribute />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
