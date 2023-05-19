@@ -1,7 +1,9 @@
+// import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+// import { UserContext } from "./UserContextProvider";
 function MongoNavBar() {
   return (
     <Navbar bg="light" expand="lg" className="nav-bar-css">
@@ -33,6 +35,14 @@ function MongoNavBar() {
               }
             >
               Contribute
+            </NavLink>
+            <NavLink
+              to="login"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Login
             </NavLink>
           </Nav>
         </Navbar.Collapse>
