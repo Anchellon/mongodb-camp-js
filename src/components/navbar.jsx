@@ -1,12 +1,14 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-// import { UserContext } from "./UserContextProvider";
+import { UserContext } from "./UserContextProvider";
 function MongoNavBar() {
+  const ctx = useContext(UserContext);
   return (
     <Navbar bg="light" expand="lg" className="nav-bar-css">
+      {ctx.user.firstName}
       <Container>
         <Navbar.Brand href="#home">
           <img

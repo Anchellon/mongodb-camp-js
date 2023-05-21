@@ -7,16 +7,17 @@ const UserContextProvider = ({ children }) => {
   const handleLogout = () => {
     setUser(null);
   };
-  useEffect(() => {
-    fetch("http://localhost:3000/getInfo", { withCredentials: true }).then(
-      (res) => {
-        console.log(res);
-        if (res.data) {
-          setUser(res.data);
-          setIsAuth(true);
+  useEffect(function () {
+    fetch("http://localhost:3000/users/getInfo", { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setUser(data);
+          //   console.log(data);
+        } else {
+          console.log("no data");
         }
-      }
-    );
+      });
   }, []);
   const value = {
     user,
