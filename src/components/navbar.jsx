@@ -4,11 +4,39 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./UserContextProvider";
+import { NavDropdown } from "react-bootstrap";
 function MongoNavBar() {
   const ctx = useContext(UserContext);
+  function delete_cookie(name, path, domain) {
+    if (get_cookie(name)) {
+      document.cookie =
+        name +
+        "=" +
+        (path ? ";path=" + path : "") +
+        (domain ? ";domain=" + domain : "") +
+        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
+  }
+  function get_cookie(name) {
+    return document.cookie.split(";").some((c) => {
+      return c.trim().startsWith(name + "=");
+    });
+  }
+  const logout = () => {
+    fetch("http://localhost:3000/logout", { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          delete_cookie("connect.sid");
+          window.location.href = "/";
+        } else {
+          console.log("no data");
+        }
+      });
+  };
   return (
     <Navbar bg="light" expand="lg" className="nav-bar-css">
-      {ctx.user.firstName}
       <Container>
         <Navbar.Brand href="#home">
           <img
@@ -20,7 +48,7 @@ function MongoNavBar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav variant="pills">
+          <Nav variant="pills" className="ms-auto">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -38,14 +66,34 @@ function MongoNavBar() {
             >
               Contribute
             </NavLink>
-            <NavLink
-              to="login"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              Login
-            </NavLink>
+            {ctx.user == undefined && (
+              <NavLink
+                to="login"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Login
+              </NavLink>
+            )}
+
+            {ctx.user && (
+              <NavDropdown
+                title={ctx.user.firstName}
+                id="collasible-nav-dropdown"
+              >
+                <NavDropdown.Item>Profile Info</NavDropdown.Item>
+
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
