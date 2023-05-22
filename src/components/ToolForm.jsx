@@ -16,7 +16,7 @@ function ToolForm() {
   };
   const submitForm = async (toolInfo) => {
     console.log(toolInfo);
-    const response = await fetch("http://localhost:3000/toolInfo", {
+    const response = await fetch("http://localhost:3000/tools", {
       method: "POST",
       body: JSON.stringify(toolInfo),
       headers: {

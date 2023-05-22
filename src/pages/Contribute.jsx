@@ -3,6 +3,7 @@ import ToolForm from "../components/ToolForm";
 import { Button, Container } from "react-bootstrap";
 
 import { UserContext } from "../components/UserContextProvider";
+import { Link } from "react-router-dom";
 
 function Contribute() {
   const ctx = useContext(UserContext);
@@ -12,7 +13,9 @@ function Contribute() {
       {ctx.user == undefined && (
         <div>
           <h2> Please Login to contribute</h2>
-          <Button>Login</Button>
+          <Link to="/login">
+            <Button>Login</Button>
+          </Link>
         </div>
       )}
       {ctx.user && (

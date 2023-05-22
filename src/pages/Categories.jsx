@@ -2,6 +2,9 @@ import CategoryCard from "../components/CategoryCard";
 import svcs from "../assets/data";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Container } from "react-bootstrap";
+function loader() {
+  return "hi";
+}
 function Categories() {
   const categories = [...new Set(svcs.map((o) => o.category))];
   const services = [];
@@ -27,4 +30,4 @@ function Categories() {
     </Container>
   );
 }
-export default Categories;
+export { Categories, loader };
