@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import config from "../config";
 
 function ToolForm() {
   const [toolInfo, setToolInfo] = useState({
@@ -16,7 +17,7 @@ function ToolForm() {
   };
   const submitForm = async (toolInfo) => {
     console.log(toolInfo);
-    const response = await fetch("http://localhost:3000/tools", {
+    const response = await fetch(config + "tools", {
       method: "POST",
       body: JSON.stringify(toolInfo),
       headers: {

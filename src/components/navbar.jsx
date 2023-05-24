@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./UserContextProvider";
 import { NavDropdown } from "react-bootstrap";
+import config from "../config";
 function MongoNavBar() {
   const ctx = useContext(UserContext);
   function delete_cookie(name, path, domain) {
@@ -23,7 +24,7 @@ function MongoNavBar() {
     });
   }
   const logout = () => {
-    fetch("http://localhost:3000/logout", { credentials: "include" })
+    fetch(config.backend_endpoint + "/logout", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
