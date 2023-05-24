@@ -17,7 +17,7 @@ function ToolForm() {
   };
   const submitForm = async (toolInfo) => {
     console.log(toolInfo);
-    const response = await fetch(config + "tools", {
+    const response = await fetch(config.backend_endpoint + "/tools", {
       method: "POST",
       body: JSON.stringify(toolInfo),
       headers: {
