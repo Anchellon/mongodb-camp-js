@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import config from "../config";
 const UserContext = createContext(null);
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -8,7 +9,9 @@ const UserContextProvider = ({ children }) => {
     setUser(null);
   };
   useEffect(function () {
-    fetch("http://localhost:3000/users/getInfo", { credentials: "include" })
+    fetch(config.backend_endpoint + "/users/getInfo", {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
