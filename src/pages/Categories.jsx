@@ -5,7 +5,13 @@ import { Container } from "react-bootstrap";
 import { useLoaderData } from "react-router";
 import config from "../config";
 export async function loader() {
-  const res = await fetch(config.backend_endpoint + "/tools");
+  const res = await fetch(config.backend_endpoint + "/tools", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  });
   if (!res.ok) {
     throw {
       message: "Failed to fetch services",
