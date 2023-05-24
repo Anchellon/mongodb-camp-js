@@ -3,8 +3,9 @@ import CategoryCard from "../components/CategoryCard";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Container } from "react-bootstrap";
 import { useLoaderData } from "react-router";
+import config from "../config";
 export async function loader() {
-  const res = await fetch("http://localhost:3000/tools");
+  const res = await fetch(config.backend_endpoint + "/tools");
   if (!res.ok) {
     throw {
       message: "Failed to fetch services",

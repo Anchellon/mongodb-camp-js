@@ -1,10 +1,11 @@
+import config from "../config";
 export default function Login() {
   const googleLogin = () => {
-    window.open("http://localhost:3000/users/auth/google", "_self");
+    window.open(config.backend_endpoint + "/users/auth/google", "_self");
   };
 
   const githubLogin = () => {
-    window.open("http://localhost:3000/users/auth/github", "_self");
+    window.open(config.backend_endpoint + "/users/auth/github", "_self");
   };
   return (
     <div>
