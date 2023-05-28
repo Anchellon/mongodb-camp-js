@@ -1,16 +1,15 @@
-import { useContext } from "react";
+import UserContext from "../utils/userContext";
 import ToolForm from "../components/ToolForm";
 import { Button, Container } from "react-bootstrap";
-
-import { UserContext } from "../components/UserContextProvider";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 function Contribute() {
-  const ctx = useContext(UserContext);
+  const { isLoggedIn } = useContext(UserContext);
   return (
     <Container>
       <div>Contribute</div>
-      {ctx.user == undefined && (
+      {!isLoggedIn && (
         <div>
           <h2> Please Login to contribute</h2>
           <Link to="/login">
@@ -18,7 +17,7 @@ function Contribute() {
           </Link>
         </div>
       )}
-      {ctx.user && (
+      {isLoggedIn && (
         <div>
           <ToolForm></ToolForm>
         </div>
