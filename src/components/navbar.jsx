@@ -1,35 +1,24 @@
-import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "./UserContextProvider";
 import { NavDropdown } from "react-bootstrap";
+import { useContext } from "react";
+import UserContext from "../utils/userContext";
 import config from "../config";
 function MongoNavBar() {
-  const ctx = useContext(UserContext);
-  function delete_cookie(name, path, domain) {
-    if (get_cookie(name)) {
-      document.cookie =
-        name +
-        "=" +
-        (path ? ";path=" + path : "") +
-        (domain ? ";domain=" + domain : "") +
-        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-    }
-  }
-  function get_cookie(name) {
-    return document.cookie.split(";").some((c) => {
-      return c.trim().startsWith(name + "=");
-    });
-  }
+  const { user, setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  console.log("I am user");
+  console.log(isLoggedIn);
   const logout = () => {
+    setUser({});
+    setIsLoggedIn(false);
     fetch(config.backend_endpoint + "/logout", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data) {
-          delete_cookie("connect.sid");
+          // delete_cookie("connect.sid");
           window.location.href = "/";
         } else {
           console.log("no data");
@@ -67,7 +56,7 @@ function MongoNavBar() {
             >
               Contribute
             </NavLink>
-            {ctx.user == undefined && (
+            {!isLoggedIn && (
               <NavLink
                 to="login"
                 className={({ isActive }) =>
@@ -78,11 +67,8 @@ function MongoNavBar() {
               </NavLink>
             )}
 
-            {ctx.user && (
-              <NavDropdown
-                title={ctx.user.firstName}
-                id="collasible-nav-dropdown"
-              >
+            {isLoggedIn && (
+              <NavDropdown title={user.firstName} id="collasible-nav-dropdown">
                 <NavDropdown.Item>Profile Info</NavDropdown.Item>
 
                 <NavDropdown.Divider />
