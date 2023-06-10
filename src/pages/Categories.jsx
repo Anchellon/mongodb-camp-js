@@ -7,7 +7,6 @@ import config from "../config";
 export async function loader() {
   const res = await fetch(config.backend_endpoint + "/tools", {
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "GET",

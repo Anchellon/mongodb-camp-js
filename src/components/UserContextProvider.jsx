@@ -11,12 +11,15 @@ const UserContextProvider = ({ children }) => {
   useEffect(function () {
     fetch(config.backend_endpoint + "/users/getInfo", {
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
           setUser(data);
-          //   console.log(data);
+          console.log(data);
         } else {
           console.log("no data");
         }
